@@ -5,7 +5,7 @@ import time
 def startCamera(filename):
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
-    
+
     with open("config.txt", "r") as f:
     # Read the save directory from the first line of the file
         save_directory = f.readline().strip()
@@ -17,7 +17,7 @@ def startCamera(filename):
     file_name = filename
 
     # Define the path to the file
-    file_path = os.path.join(save_directory, file_name)
+    file_path = os.path.join('/media/august/Memorex USB/Dashcamfootage', file_name)
 
     # Define the ffmpeg command to capture video
     command = (
