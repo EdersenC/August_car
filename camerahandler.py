@@ -4,7 +4,7 @@ import subprocess
 import time
 def startCamera(filename):
     # Define the directory where the video will be saved
-    save_directory = '/media/pi/Memorex USB/Dashcamfootage'
+    save_directory = '/media/august/Memorex USB/Dashcamfootage'
 
     # Get the current date and time
     now = datetime.datetime.now()
