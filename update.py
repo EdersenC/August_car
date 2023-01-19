@@ -5,12 +5,9 @@ import datetime
 now = datetime.datetime.now()
 version_date = now.strftime("%Y-%m-%d")
 
-# Set the Git repository URL, username, and password
-username = "EdersenC"
-password = "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"
 
 # Run the git pull command with the username and password as command line arguments
-result = subprocess.run(["git", "pull", username, password], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(["git", "pull"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Print the output of the command
 print(result.stdout.decode())
