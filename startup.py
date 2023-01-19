@@ -5,9 +5,7 @@ bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdou
 
 if bluetooth_status.stdout.decode().strip() == 'active':
 
-    subprocess.run(['bluetoothctl'])
-    subprocess.run(['connect 88:64:40:2B:7B:41'])
-    subprocess.run(['exit'])
+    subprocess.run(['bluetoothctl','connect 88:64:40:2B:7B:41','exit'])
 
     scripts = ['update.py', 'camerahandler.py']
     process = None
