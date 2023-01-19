@@ -10,7 +10,7 @@ username = "EdersenC"
 password = "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"
 
 # Run the git pull command with the username and password as command line arguments
-result = subprocess.run(["git", "pull"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(["git", "pull", username, password], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Print the output of the command
 print(result.stdout.decode())
@@ -28,12 +28,11 @@ if result.returncode == 0:
     with open("AugustCar_SoftWareVersion.txt", "w") as f:
         f.write(new_version)
     print("Command completed successfully.")
-    # Update Bluetooth and WiFi
-    subprocess.run(["sudo", "apt-get", "update"])
-    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "bluetooth"])
-    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "wifi"])
-    # Update fswebcam
-    subprocess.run(["sudo", "apt-get", "install", "-y", "fswebcam"])
+    subprocess.run(["sudo", "apt-get", "update", ""])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "bluetooth", "--allow-unauthenticated"])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "wifi", "--allow-unauthenticated"])
+    subprocess.run(["sudo", "apt-get", "install", "-y", "fswebcam", "--allow-unauthenticated"])
+
     print("Bluetooth, WiFi and fswebcam updated successfully.")
 else:
     print("Command failed with return code", result.returncode)
