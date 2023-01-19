@@ -4,10 +4,14 @@ import subprocess
 import time
 def startCamera(filename):
     # Define the directory where the video will be saved
-    save_directory = '/media/august/Memorex USB/Dashcamfootage'
+    now = datetime.datetime.now()
+    
+    with open("config.txt", "r") as f:
+    # Read the save directory from the first line of the file
+        save_directory = f.readline().strip()
 
     # Get the current date and time
-    now = datetime.datetime.now()
+    
 
     # Format the date and time for the file name
     file_name = filename
