@@ -36,7 +36,6 @@ while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
     command = startCamera(file_name)
-    process = subprocess.Popen(command)
-    process.wait()
-    process.terminate()
+    command.wait()
+    command.terminate()
 
