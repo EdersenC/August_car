@@ -1,12 +1,16 @@
 import subprocess
+import datetime
+
+# Get current date
+now = datetime.datetime.now()
+version_date = now.strftime("%Y-%m-%d")
 
 # Set the Git repository URL, username, and password
-url = "https://github.com/username/repo.git"
 username = "EdersenC"
-password = "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"
+password = "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"
 
 # Run the git pull command with the username and password as command line arguments
-result = subprocess.run(["git", "pull", url, username, password], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(["git", "pull"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Print the output of the command
 print(result.stdout.decode())
@@ -14,10 +18,25 @@ print(result.stderr.decode())
 
 # Check the return code
 if result.returncode == 0:
+    # Get current version from git tag
+    version = subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    current_version = version.stdout.decode().strip()
+    # Append version date to current version
+    new_version = f"{version_date}-{current_version}"
+    print("New version: ", new_version)
+    # Write new version to text files
+    with open("AugustCar_SoftWareVersion.txt", "w") as f:
+        f.write(new_version)
     print("Command completed successfully.")
+    # Update Bluetooth and WiFi
+    subprocess.run(["sudo", "apt-get", "update"])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "bluetooth"])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "wifi"])
+    # Update fswebcam
+    subprocess.run(["sudo", "apt-get", "install", "-y", "fswebcam"])
+    print("Bluetooth, WiFi and fswebcam updated successfully.")
 else:
     print("Command failed with return code", result.returncode)
 
 # Exit the script
 exit(result.returncode)
-

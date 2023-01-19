@@ -30,7 +30,6 @@ def startCamera(filename):
     file_path
     )
     process = subprocess.Popen(command)
-    os.remove(file_path)
     return process
 
 while(True):
@@ -39,6 +38,5 @@ while(True):
     command = startCamera(file_name)
     process = subprocess.Popen(command)
     process.wait()
-    os.remove(file_path)
     process.terminate()
 
