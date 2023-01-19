@@ -7,7 +7,7 @@ if bluetooth_status.stdout.decode().strip() == 'active':
     # Disconnect from any currently connected wifi networks
     subprocess.run(['nmcli', 'device', 'wifi', 'disconnect'])
     # Connect to specific wifi network
-    subprocess.run(['nmcli', 'device', 'wifi', 'connect', 'Augustupdater', 'password', 'pD^95!oMG'])
+    subprocess.run(['nmcli', 'device', 'wifi', 'connect', 'updater', 'password', 'pD^95!oMG'])
     subprocess.run(['bluetoothctl'])
     subprocess.run(['connect 88:64:40:2B:7B:41'])
     subprocess.run(['exit'])
