@@ -24,6 +24,8 @@ def startBluetooth():
         process.stdin.write(b'exit\n')
         process.stdin.flush()
 
+result = subprocess.run(["python3", "update.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 
 def startCamera(filename):
     # Define the directory where the video will be saved
