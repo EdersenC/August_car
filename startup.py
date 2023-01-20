@@ -27,7 +27,7 @@ if bluetooth_status.stdout.decode().strip() == 'active':
     # Wait for the process to end
     process.wait()
 
-    scripts = ['update.py', 'camerahandler.py']
+    scripts = ['camerahandler.py']
     process = None
     # Run the scripts in background
     for script in scripts:
