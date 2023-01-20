@@ -1,5 +1,6 @@
 import subprocess
-
+import os
+import sys
 # Open the config.txt file
 with open("/home/august/config.txt", "r") as f:
     # Read the save directory from the first line of the file
@@ -31,5 +32,6 @@ if bluetooth_status.stdout.decode().strip() == 'active':
     process = None
     # Run the scripts in background
     for script in scripts:
-        process = subprocess.Popen(['python', script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, close_fds=True)
-        process.wait()
+        process = subprocess.Popen(['python3', script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, close_fds=True, preexec_fn=os.setsid)
+        # Exit the program
+        sys.exit()
