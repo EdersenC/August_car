@@ -1,5 +1,4 @@
 import subprocess
-import dbus
 
 # Open the config.txt file
 with open("/home/august/config.txt", "r") as f:
@@ -23,17 +22,6 @@ if bluetooth_status.stdout.decode().strip() == 'active':
     process.stdin.flush()
 
 
-    # Connect to the session bus
-    bus = dbus.SessionBus()
-
-    # Get the media player object
-    player = bus.get_object("org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2")
-
-    # Get the media player interface
-    iface = dbus.Interface(player, "org.mpris.MediaPlayer2.Player")
-
-    # Send the "Play" command
-    iface.Play()
 
 
     # Wait for the process to end
