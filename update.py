@@ -25,7 +25,12 @@ if result.returncode == 0:
     with open("AugustCar_SoftWareVersion.txt", "w") as f:
         f.write(new_version)
     print("Command completed successfully.")
+    subprocess.run(["sudo", "apt-get", "update", ""])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "bluetooth", "--allow-unauthenticated"])
+    subprocess.run(["sudo", "apt-get", "upgrade", "-y", "wifi", "--allow-unauthenticated"])
+    subprocess.run(["sudo", "apt-get", "install", "-y", "fswebcam", "--allow-unauthenticated"])
 
+    print("Bluetooth, WiFi and fswebcam updated successfully.")
 else:
     print("Command failed with return code", result.returncode)
 
