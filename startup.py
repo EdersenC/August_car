@@ -21,6 +21,12 @@ if bluetooth_status.stdout.decode().strip() == 'active':
     process.stdin.write(b'exit\n')
     process.stdin.flush()
 
+    # Check the status of mplayer
+    mplayer = subprocess.Popen(["mplayer", "-slave", "-quiet", "-idle"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # Send the pause command to toggle the pause state
+    mplayer.stdin.write(b"pause\n")
+    mplayer.stdin.flush()
+
     # Wait for the process to end
     process.wait()
 
