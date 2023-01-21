@@ -15,7 +15,7 @@ with open("/home/august/carsetup/config.json", "r") as f:
 def startBluetooth():
     # Check if bluetooth service is running
     bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
-    subprocess.run(["git", "pull"])
+    
 
     if bluetooth_status.stdout.decode().strip() == 'active':
         # Open the bluetooth command-line interface
@@ -28,47 +28,11 @@ def startBluetooth():
         process.stdin.write(b'exit\n')
         process.stdin.flush()
         
-def update():
-    # Get current date
-    now = datetime.datetime.now()
-    version_date = now.strftime("%Y-%m-%d")
-
-
-    # Run the git pull command with the username and password as command line arguments
-    result = subprocess.run(["git", "pull"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    # Print the output of the command
-    print(result.stdout.decode())
-    print(result.stderr.decode())
-
-    # Check the return code
-    if result.returncode == 0:
-        # Get current version from git tag
-        version = subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        current_version = version.stdout.decode().strip()
-        # Append version date to current version
-        new_version = f"{version_date}-{current_version}"
-        print("New version: ", new_version)
-        # Write new version to text files
-        with open("/home/august/carsetup/August_car/AugustCar_SoftWareVersion.txt", "w") as f:
-            f.write(new_version)
-        print("Command completed successfully.")
-        subprocess.run(["git", "pull"])
-        subprocess.run(["sudo", "apt-get", "update", ""])
-        subprocess.run(["sudo", "apt-get", "upgrade", "-y", "bluetooth", "--allow-unauthenticated"])
-        subprocess.run(["sudo", "apt-get", "upgrade", "-y", "wifi", "--allow-unauthenticated"])
-        subprocess.run(["sudo", "apt-get", "install", "-y", "fswebcam", "--allow-unauthenticated"])
-
-        print("Bluetooth, WiFi and fswebcam updated successfully.")
-    else:
-        print("Command failed with return code", result.returncode)
-
-
 
 
 
 def startCamera(filename):
-    time.sleep(5)
+    subprocess.run(["git", "pull"])
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
 
@@ -84,7 +48,7 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '300',
+    '-t', '300'
     '-s', '1280x720',
     '-vcodec', 'mjpeg',
     '-b:v', '70M',
