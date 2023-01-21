@@ -12,22 +12,6 @@ with open("/home/august/carsetup/config.json", "r") as f:
     hotspot_ssid = config["hotspot_ssid"] 
     hotspot_password = config["hotspot_password"]
 
-# Use the settings in your code
-def startBluetooth():
-    # Check if bluetooth service is running
-    bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
-
-    if bluetooth_status.stdout.decode().strip() == 'active':
-        # Open the bluetooth command-line interface
-        process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
-        process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
-        process.stdin.flush()
-        # Send the 'exit' command to the bluetooth command-line interface
-        process.stdin.write(b'exit\n')
-        process.stdin.flush()
-        
 def update():
     # Get current date
     now = datetime.datetime.now()
@@ -66,6 +50,23 @@ def update():
     # Exit the script
     exit(result.returncode)
 
+# Use the settings in your code
+def startBluetooth():
+    # Check if bluetooth service is running
+    bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
+
+    if bluetooth_status.stdout.decode().strip() == 'active':
+        # Open the bluetooth command-line interface
+        process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
+        process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
+        process.stdin.flush()
+        # Send the 'exit' command to the bluetooth command-line interface
+        process.stdin.write(b'exit\n')
+        process.stdin.flush()
+        
+
 def startCamera(filename):
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
@@ -95,8 +96,10 @@ def startCamera(filename):
     return process
 
     
-command2 = startBluetooth()
-command3 = update()
+def start():
+    startBluetooth()
+    update()
+
 
 while(True):
 
