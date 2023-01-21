@@ -7,7 +7,7 @@ version_date = now.strftime("%Y-%m-%d")
 
 
 # Run the git pull command with the username and password as command line arguments
-result = subprocess.run(["git", "pull","/home/august/carsetup/August_car"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+result = subprocess.run(["git", "pull"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Print the output of the command
 print(result.stdout.decode())
