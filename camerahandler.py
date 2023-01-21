@@ -55,13 +55,12 @@ def startCamera(filename):
     )
     process = subprocess.Popen(command)
     return process
-
+command2 = startBluetooth()
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
-    command2 = startBluetooth()
     command = startCamera(file_name)
     
     command.wait()
     command.terminate()
-subprocess.run(["nmcli", "dev", "wifi", "connect", hotspot_ssid, "pD^95!oMG", hotspot_password, "Updater", "wlx6ccdd6c58760"])
+
