@@ -27,12 +27,12 @@ def startBluetooth():
         # Send the 'exit' command to the bluetooth command-line interface
         process.stdin.write(b'exit\n')
         process.stdin.flush()
+        subprocess.run(["git", "pull"])
         
 
 
 
 def startCamera(filename):
-    subprocess.run(["git", "pull"])
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
 
@@ -66,12 +66,11 @@ def startCamera(filename):
 
 
 
-
+command2 = startBluetooth()
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
     command = startCamera(file_name)
-    startBluetooth()
     command.wait()
     command.terminate()
 
