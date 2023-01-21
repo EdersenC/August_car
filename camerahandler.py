@@ -66,11 +66,12 @@ def startCamera(filename):
 
 
 
-command2 = startBluetooth()
+
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
     command = startCamera(file_name)
+    command2 = startBluetooth()
     command.wait()
     command.terminate()
 
