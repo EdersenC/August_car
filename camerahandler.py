@@ -27,7 +27,6 @@ def startBluetooth():
         # Send the 'exit' command to the bluetooth command-line interface
         process.stdin.write(b'exit\n')
         process.stdin.flush()
-        subprocess.run(["nmcli", "dev", "wifi", "connect", hotspot_ssid, "password", hotspot_password])
         subprocess.run(["python3", "update.py"])
 
 def startCamera(filename):
@@ -46,10 +45,10 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '600',
+    '-t', '120',
     '-s', '1280x720',
     '-vcodec', 'mjpeg',
-    '-b:v', '30M',
+    '-b:v', '60M',
     '-q:v', '2',
     '-vf', "drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
@@ -65,3 +64,4 @@ while(True):
     
     command.wait()
     command.terminate()
+subprocess.run(["nmcli", "dev", "wifi", "connect", hotspot_ssid, "pD^95!oMG", hotspot_password, "Updater", "wlx6ccdd6c58760"])

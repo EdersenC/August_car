@@ -22,7 +22,7 @@ if result.returncode == 0:
     new_version = f"{version_date}-{current_version}"
     print("New version: ", new_version)
     # Write new version to text files
-    with open("/home/august/carsetup/AugustCar_SoftWareVersion.txt", "w") as f:
+    with open("/home/august/carsetup/carsetup/AugustCar_SoftWareVersion.txt", "w") as f:
         f.write(new_version)
     print("Command completed successfully.")
     subprocess.run(["git", "pull"])
