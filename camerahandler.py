@@ -15,6 +15,7 @@ with open("/home/august/carsetup/config.json", "r") as f:
 def startBluetooth():
     # Check if bluetooth service is running
     bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
+    subprocess.run(["git", "pull"])
 
     if bluetooth_status.stdout.decode().strip() == 'active':
         # Open the bluetooth command-line interface
