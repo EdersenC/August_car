@@ -9,7 +9,7 @@ with open("/home/august/carsetup/config.json", "r") as f:
     config = json.load(f)
     save_directory = config["save_directory"]
     bluetooth_mac = config["bluetooth_mac"]
-    hotspot_ssid = config["hotspot_ssid"]
+    hotspot_ssid = config["hotspot_ssid"] 
     hotspot_password = config["hotspot_password"]
 
 # Use the settings in your code
@@ -82,7 +82,7 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '120',
+    '-t', '3600',
     '-s', '1280x720',
     '-vcodec', 'mjpeg',
     '-b:v', '60M',
@@ -91,9 +91,13 @@ def startCamera(filename):
     file_path
     )
     process = subprocess.Popen(command)
+
     return process
+
+    
 command2 = startBluetooth()
 command3 = update()
+
 while(True):
 
     now = datetime.datetime.now()
