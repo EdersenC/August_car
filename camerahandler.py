@@ -2,43 +2,39 @@ import datetime
 import os
 import subprocess
 import time
+import json
 
+# Open the config.json file to read the settings
+with open("config.json", "r") as f:
+    config = json.load(f)
+    save_directory = config["save_directory"]
+    bluetooth_mac = config["bluetooth_mac"]
+    hotspot_ssid = config["hotspot_ssid"]
+    hotspot_password = config["hotspot_password"]
+
+# Use the settings in your code
 def startBluetooth():
-    with open("/home/august/config.txt", "r") as f:
-    # Read the save directory from the first line of the file
-        save_directory = f.readline().strip()
-    # Read the bluetooth MAC address from the second line of the file
-        bluetooth_mac = f.readline().strip()
-
-# Check if bluetooth service is running
+    # Check if bluetooth service is running
     bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
 
     if bluetooth_status.stdout.decode().strip() == 'active':
-    # Open the bluetooth command-line interface
+        # Open the bluetooth command-line interface
         process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
+        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
         process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
         process.stdin.flush()
-    # Send the 'exit' command to the bluetooth command-line interface
+        # Send the 'exit' command to the bluetooth command-line interface
         process.stdin.write(b'exit\n')
         process.stdin.flush()
-
-result = subprocess.run(["python3", "update.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+        subprocess.run(["nmcli", "dev", "wifi", "connect", hotspot_ssid, "password", hotspot_password])
+        subprocess.run(["python3", "update.py"])
 
 def startCamera(filename):
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
-    
-    with open("/home/august/config.txt", "r") as f:
-    # Read the save directory from the first line of the file
-        save_directory = f.readline().strip()
 
     # Get the current date and time
-    
-
-    # Format the date and time for the file name
     file_name = filename
 
     # Define the path to the file
@@ -64,8 +60,8 @@ def startCamera(filename):
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
-    command = startCamera(file_name)
     command2 = startBluetooth()
+    command = startCamera(file_name)
+    
     command.wait()
     command.terminate()
-
