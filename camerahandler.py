@@ -5,7 +5,7 @@ import time
 import json
 
 # Open the config.json file to read the settings
-with open("config.json", "r") as f:
+with open("/home/august/carsetup/config.json", "r") as f:
     config = json.load(f)
     save_directory = config["save_directory"]
     bluetooth_mac = config["bluetooth_mac"]
