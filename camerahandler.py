@@ -99,9 +99,8 @@ def startCamera(filename):
     
 def start():
     startBluetooth()
-    update()
 
-    
+
 start()
 
 while(True):
