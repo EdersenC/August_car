@@ -84,10 +84,10 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '3600',
+    '-t', '300',
     '-s', '1280x720',
     '-vcodec', 'mjpeg',
-    '-b:v', '60M',
+    '-b:v', '70M',
     '-q:v', '2',
     '-vf', "drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
@@ -99,6 +99,7 @@ def startCamera(filename):
     
 def start():
     startBluetooth()
+    time.sleep(1)
     update()
 
 
