@@ -62,13 +62,12 @@ def update():
     else:
         print("Command failed with return code", result.returncode)
 
-    # Exit the script
-    exit(result.returncode)
 
 
-        
+
 
 def startCamera(filename):
+    time.sleep(5)
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
 
@@ -96,15 +95,16 @@ def startCamera(filename):
 
     return process
 
+
     
 def start():
     startBluetooth()
-    time.sleep(1)
     update()
 
+    
+start()
 
 while(True):
-
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
     command = startCamera(file_name)
