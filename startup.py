@@ -1,12 +1,14 @@
 import subprocess
 import os
 import sys
+import json
 # Open the config.txt file
-with open("/home/august/config.txt", "r") as f:
-    # Read the save directory from the first line of the file
-    save_directory = f.readline().strip()
-    # Read the bluetooth MAC address from the second line of the file
-    bluetooth_mac = f.readline().strip()
+with open("/home/august/carsetup/config.json", "r") as f:
+    config = json.load(f)
+    save_directory = config["save_directory"]
+    bluetooth_mac = config["bluetooth_mac"]
+    hotspot_ssid = config["hotspot_ssid"] 
+    hotspot_password = config["hotspot_password"]
 
 # Check if bluetooth service is running
 bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)

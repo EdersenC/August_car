@@ -12,22 +12,7 @@ with open("/home/august/carsetup/config.json", "r") as f:
     hotspot_ssid = config["hotspot_ssid"] 
     hotspot_password = config["hotspot_password"]
 # Use the settings in your code
-def startBluetooth():
-    # Check if bluetooth service is running
-    bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
-    
 
-    if bluetooth_status.stdout.decode().strip() == 'active':
-        # Open the bluetooth command-line interface
-        process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
-        process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
-        process.stdin.flush()
-        # Send the 'exit' command to the bluetooth command-line interface
-        process.stdin.write(b'exit\n')
-        process.stdin.flush()
-        subprocess.run(["git", "pull"])
         
 
 
@@ -61,20 +46,7 @@ def startCamera(filename):
     return process
 
 
-    
-
-
-
-process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
-process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
-process.stdin.flush()
-# Send the 'exit' command to the bluetooth command-line interface
-process.stdin.write(b'exit\n')
-process.stdin.flush()
-subprocess.run(["git", "pull"])
-
+subprocess.run(['python3','startup.py'])    
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
