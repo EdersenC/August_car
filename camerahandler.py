@@ -10,6 +10,7 @@ with open("/home/august/carsetup/config.json", "r") as f:
     save_directory = config["save_directory"]
     bluetooth_mac = config["bluetooth_mac"]
     hotspot_ssid = config["hotspot_ssid"] 
+    night_mode = config["night_mode"]
     hotspot_password = config["hotspot_password"]
 # Use the settings in your code
 def startbluetooth():
@@ -39,8 +40,11 @@ def startCamera(filename):
 
     # Define the path to the file
     file_path = os.path.join(save_directory, file_name)
+    if night_mode:
+        iso = 800
+    else:
+        iso = 400
 
-    # Define the ffmpeg command to capture video
     command = (
     'ffmpeg',
     '-f', 'v4l2',
@@ -51,18 +55,20 @@ def startCamera(filename):
     '-vcodec', 'mjpeg',
     '-b:v', '70M',
     '-q:v', '2',
-    '-vf', "drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
+    '-ISO', iso,
+    '-vf',"drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
     )
+    process = subprocess.Popen(command)
+    # Define the ffmpeg command to capture video
     process = subprocess.Popen(command)
 
     return process
 
-startbluetooth()
-while(True):
-    now = datetime.datetime.now()
-    file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
-    command = startCamera(file_name)
-    command.wait()
-    command.terminate()
+
+now = datetime.datetime.now()
+file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
+command = startCamera(file_name)
+command.wait()
+command.terminate()
 
