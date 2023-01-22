@@ -12,8 +12,20 @@ with open("/home/august/carsetup/config.json", "r") as f:
     hotspot_ssid = config["hotspot_ssid"] 
     hotspot_password = config["hotspot_password"]
 # Use the settings in your code
+def startbluetooth():
+    # Check if bluetooth service is running
+    bluetooth_status = subprocess.run(['systemctl', 'is-active', 'bluetooth'], stdout=subprocess.PIPE)
 
-        
+    if bluetooth_status.stdout.decode().strip() == 'active':
+        # Open the bluetooth command-line interface
+        process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
+        process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
+        process.stdin.flush()
+        # Send the 'exit' command to the bluetooth command-line interface
+        process.stdin.write(b'exit\n')
+        process.stdin.flush()     
 
 
 
@@ -33,10 +45,10 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '300'
-    '-s', '1280x720',
+    '-t', '600'
+    '-s', '1080x720',
     '-vcodec', 'mjpeg',
-    '-b:v', '70M',
+    '-b:v', '30M',
     '-q:v', '2',
     '-vf', "drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
