@@ -57,8 +57,7 @@ def startCamera(filename):
 
     return process
 
-
-subprocess.run(['python3','startup.py'])    
+startbluetooth()
 while(True):
     now = datetime.datetime.now()
     file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
