@@ -18,6 +18,7 @@ def startbluetooth():
 
     if bluetooth_status.stdout.decode().strip() == 'active':
         # Open the bluetooth command-line interface
+        time.sleep(5)
         process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
