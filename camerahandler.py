@@ -54,8 +54,9 @@ def startCamera(filename):
     '-s', '1080x720',
     '-vcodec', 'mjpeg',
     '-b:v', '70M',
-    '-q:v', '2',
-    '-ISO', '800',
+    '-q:v', '2', 
+    '-exposure', 'auto',
+    '-shutter' , '1000'
     '-vf',"drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
     )
