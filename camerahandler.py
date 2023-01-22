@@ -33,15 +33,6 @@ def startBluetooth():
 
 
 def startCamera(filename):
-    process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
-    process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
-    process.stdin.flush()
-    # Send the 'exit' command to the bluetooth command-line interface
-    process.stdin.write(b'exit\n')
-    process.stdin.flush()
-    subprocess.run(["git", "pull"])
     # Define the directory where the video will be saved
     now = datetime.datetime.now()
 
@@ -74,7 +65,15 @@ def startCamera(filename):
 
 
 
+process = subprocess.Popen(['bluetoothctl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
+    # Send the 'connect XX:XXX:XX:XX' command to the bluetooth command-line interface
+process.stdin.write(f'connect {bluetooth_mac}\n'.encode())
+process.stdin.flush()
+# Send the 'exit' command to the bluetooth command-line interface
+process.stdin.write(b'exit\n')
+process.stdin.flush()
+subprocess.run(["git", "pull"])
 
 while(True):
     now = datetime.datetime.now()
