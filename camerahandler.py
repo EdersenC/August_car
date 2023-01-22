@@ -60,8 +60,7 @@ def startCamera(filename):
     file_path
     )
     process = subprocess.Popen(command)
-    # Define the ffmpeg command to capture video
-    process = subprocess.Popen(command)
+    # Define the ffmpeg command to capture vide
 
     return process
 
