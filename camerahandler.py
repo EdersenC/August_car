@@ -10,7 +10,6 @@ with open("/home/august/carsetup/config.json", "r") as f:
     save_directory = config["save_directory"]
     bluetooth_mac = config["bluetooth_mac"]
     hotspot_ssid = config["hotspot_ssid"] 
-    night_mode = config["night_mode"]
     hotspot_password = config["hotspot_password"]
 # Use the settings in your code
 def startbluetooth():
