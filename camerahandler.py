@@ -50,7 +50,7 @@ def startCamera(filename):
     '-f', 'v4l2',
     '-r', '30',
     '-i', '/dev/video0',
-    '-t', '300',
+    '-t', '1800',
     '-s', '1080x720',
     '-vcodec', 'mjpeg',
     '-b:v', '70M',
