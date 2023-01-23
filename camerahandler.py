@@ -39,10 +39,7 @@ def startCamera(filename):
 
     # Define the path to the file
     file_path = os.path.join(save_directory, file_name)
-    if night_mode:
-        iso = 800
-    else:
-        iso = 400
+ 
 
     command = (
     'ffmpeg',
