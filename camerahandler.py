@@ -28,9 +28,6 @@ def startbluetooth():
         process.stdin.write(b'exit\n')
         process.stdin.flush()     
 
-def stop_ffmpeg():
-    subprocess.call(['pkill', '-f', 'ffmpeg'])
-
 
 def startCamera(filename):
     # Define the directory where the video will be saved
@@ -64,8 +61,6 @@ def startCamera(filename):
 
 now = datetime.datetime.now()
 file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
-stop_ffmpeg
-time.sleep(1)
 command = startCamera(file_name)
 command.wait()
 command.terminate()
