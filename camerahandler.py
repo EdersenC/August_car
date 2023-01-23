@@ -28,6 +28,8 @@ def startbluetooth():
         process.stdin.write(b'exit\n')
         process.stdin.flush()     
 
+def pull():
+    subprocess.run(['git', 'pull'])
 
 def startCamera(filename):
     # Define the directory where the video will be saved
