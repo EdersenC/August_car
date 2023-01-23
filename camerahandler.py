@@ -63,7 +63,10 @@ def startCamera(filename):
 
 now = datetime.datetime.now()
 file_name = now.strftime("%Y-%m-%d %I-%M %p") + '.avi'
+pull()
+time.sleep(1)
 command = startCamera(file_name)
+
 command.wait()
 command.terminate()
 
