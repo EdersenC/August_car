@@ -3,7 +3,7 @@ import os
 import subprocess
 import time
 import json
-import pygame
+
 
 # Open the config.json file to read the settings
 with open("/home/august/carsetup/config.json", "r") as f:
@@ -31,12 +31,6 @@ def startbluetooth():
 
 def pull():
     subprocess.run(['git', 'pull']) 
-    sound = pygame.mixer.Sound('ding.wav')
-    # Play the sound
-    sound.play()
-
-    # Wait until the sound finishes playing
-    pygame.time.wait(sound.get_length() * 1000)
 
 
 def startCamera(filename):
