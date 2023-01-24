@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 import json
+import pygame
 
 # Open the config.json file to read the settings
 with open("/home/august/carsetup/config.json", "r") as f:
@@ -29,7 +30,14 @@ def startbluetooth():
         process.stdin.flush()     
 
 def pull():
-    subprocess.run(['git', 'pull'])
+    subprocess.run(['git', 'pull']) 
+    sound = pygame.mixer.Sound('ding.wav')
+    # Play the sound
+    sound.play()
+
+    # Wait until the sound finishes playing
+    pygame.time.wait(sound.get_length() * 1000)
+
 
 def startCamera(filename):
     # Define the directory where the video will be saved
@@ -55,6 +63,7 @@ def startCamera(filename):
     '-vf',"drawtext=fontfile=/home/pi/font/matrole/metrole.ttf: text='%{localtime\:%Y-%m-%d %T}': x=10: y=10: fontcolor=red: box=1: boxcolor=black@0.5",
     file_path
     )
+
     process = subprocess.Popen(command)
     # Define the ffmpeg command to capture vide
 
